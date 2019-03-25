@@ -12,12 +12,12 @@ def target_func(x1, x2):
 
 
 # 训练数据存放路径
-file_path = 'data_training.csv'
-lines = 2000
+file_path = 'data_testing.csv'
+lines = 500
 
 with open(file_path, 'w') as fp:
     for i in range(lines):
-        a = 1000 * random.random() - 500
+        a = 1000 * random.random() - 500  # 这里的变换是因为random使用的是(0,1)均匀分布
         b = 1000 * random.random() - 500
         y = target_func(a, b)
         fp.write(str(y))
@@ -28,7 +28,5 @@ with open(file_path, 'w') as fp:
         fp.write('\n')
         pass
     pass
-
-# 生成测试集之后，进行显示一个散点图。
 
 

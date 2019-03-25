@@ -35,11 +35,13 @@ class NeuralNetwork:
 
         # 隐藏层输入：对输入进行加权合并
         hidden_inputs = numpy.dot(self.wih, inputs)
+
         # 隐藏层输出：使用激活函数
         hidden_outputs = self.active_function(hidden_inputs)
 
         # 输出层的输入：对输入进行加权合并
         final_inputs = numpy.dot(self.who, hidden_outputs)
+
         # 最终输出：使用激活函数
         final_outputs = self.active_function(final_inputs)
 
@@ -47,12 +49,17 @@ class NeuralNetwork:
 
     def train(self, inputs_list, targets_list):
         # 将测试输入改为2维
-        inputs = numpy.array(inputs_list).T
-        targets = numpy.array(targets_list, ndmin=2).T
+        inputs = numpy.array(inputs_list, ndmin=2).T
+        targets = numpy.array(targets_list, ndmin=1).T
 
         # 前向通道
         hidden_inputs = numpy.dot(self.wih, inputs)
+        # print("inputs")
+        # print(hidden_inputs)
+
         hidden_outputs = self.active_function(hidden_inputs)
+        # print("outputs")
+        # print(hidden_outputs)
 
         final_inputs = numpy.dot(self.who, hidden_outputs)
         final_outputs = self.active_function(final_inputs)
@@ -70,9 +77,7 @@ class NeuralNetwork:
 
         # 调节输入层至隐藏层之间的权值矩阵
         self.wih += self.lr * numpy.dot((hidden_errors * hidden_outputs *
-                                         (1.0 - hidden_outputs)),
+                                        (1.0 - hidden_outputs)),
                                         numpy.transpose(inputs))
 
         pass
-
-
